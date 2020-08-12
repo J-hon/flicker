@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 
     <style>
         /*
@@ -27,8 +28,19 @@
         @media screen and (max-width: 668px) {
             .alert{ /* center the alert on small screens */
                 left: 10px;
-                right: 10px; 
+                right: 10px;
             }
+        }
+
+        #box {
+            padding: 80px 30px 80px 30px;
+            height: auto;
+            box-shadow: #C0C0C0;
+        }
+
+        #box:hover {
+            display: inline-block;
+            box-shadow: 2px 4px 18px 2px #C0C0C0;
         }
     </style>
 
@@ -41,8 +53,8 @@
         @yield('content')
     </main>
 
-    <script src="{{asset('js/app.js')}}"></script>
-    
+    <script src="{{ asset('js/app.js') }}"></script>
+
     {{-- Success Alert --}}
     @if(session('status'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -63,14 +75,15 @@
         </div>
     @endif
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
     <script>
-        //close the alert after 3 seconds.
-        $(document).ready(function(){
+        // close the alert after 5 seconds.
+        $(document).ready(function() {
 			setTimeout(function() {
 	        	$(".alert").alert('close');
-	    	}, 3000);
+	    	}, 5000);
     	});
     </script>
-    
+
 </body>
 </html>
