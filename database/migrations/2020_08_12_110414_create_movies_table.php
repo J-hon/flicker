@@ -17,7 +17,7 @@ class CreateMoviesTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('description');
-            $table->decimal('price', 8, 2);
+            $table->decimal('price', 7, 2);
             $table->bigInteger('genre_id')->unsigned();
             $table->timestamps();
 

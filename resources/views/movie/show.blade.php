@@ -29,8 +29,21 @@
                         <td>{{ $movie->description }}</td>
                         <td>{{ $movie->genre->name }}</td>
                         <td>₦{{ $movie->price }}</td>
-                        <td><a href="{{ route('admin.movies.edit', $movie->id) }}"><i class="fa fa-edit"></i></a></td>
-                        <td><a href="#"><i class="fa fa-trash" style="color: #ff6b6b;"></i></a></td>
+                        <td>
+                            <a href="{{ route('admin.movies.edit', $movie->id) }}" class="btn btn-sm btn-outline-primary">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                        </td>
+                        <td>
+                            <form action="{{ route('admin.movies.destroy', $movie->id) }}" method="post">
+                                @csrf
+                                {{ method_field('DELETE') }}
+
+                                <button type="submit" class="btn btn-outline-danger btn-sm">
+                                    <i class="fa fa-trash" style="color: #ff6b6b;"></i>
+                                </button>
+                            </form>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>

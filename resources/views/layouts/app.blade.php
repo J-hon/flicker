@@ -32,6 +32,11 @@
             }
         }
 
+        #image {
+            height: 220px;
+            width: 150px;
+        }
+
         #box {
             padding: 80px 30px 80px 30px;
             height: auto;
