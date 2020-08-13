@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Movie;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -17,5 +17,11 @@ class HomeController extends Controller
     {
         $movies = Movie::all();
         return view('welcome')->with('movies', $movies);
+    }
+
+    public function userIndex()
+    {
+        $user = Auth::user();
+        return view('home')->with('user', $user);
     }
 }

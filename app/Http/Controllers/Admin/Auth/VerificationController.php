@@ -9,7 +9,7 @@ class VerificationController extends Controller
 {
     /**
      * Create a controller instance.
-     * 
+     *
      * @return void
      */
     public function __construct()
@@ -36,14 +36,15 @@ class VerificationController extends Controller
 
     /**
      * Verfy the user email.
-     * 
+     *
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function verify(Request $request)
     {
-        if ($request->route('id') != $request->user('admin')->getKey()) {
-            //id value doesn't match.
+        if ($request->route('id') != $request->user('admin')->getKey())
+        {
+            // id value doesn't match.
             return redirect()
                 ->route('admin.verification.notice')
                 ->with('error','Invalid user!');
@@ -63,13 +64,14 @@ class VerificationController extends Controller
 
     /**
      * Resend the verification email.
-     * 
+     *
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function resend(Request $request)
     {
-        if ($request->user('admin')->hasVerifiedEmail()) {
+        if ($request->user('admin')->hasVerifiedEmail())
+        {
             return redirect()->route('admin.home');
         }
 

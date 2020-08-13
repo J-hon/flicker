@@ -32,10 +32,11 @@ class ForgotPasswordController extends Controller
 
     /**
      * Show the reset email form.
-     * 
-     * @return \Illuminate\Http\Response
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function showLinkRequestForm(){
+    public function showLinkRequestForm()
+    {
         return view('auth.passwords.email',[
             'title' => 'Password Reset',
             'passwordEmailRoute' => 'password.email'

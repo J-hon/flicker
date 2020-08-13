@@ -31,7 +31,7 @@
                         <td>₦{{ $movie->price }}</td>
                         <td>
                             <a href="{{ route('admin.movies.edit', $movie->id) }}" class="btn btn-sm btn-outline-primary">
-                                <i class="fa fa-edit"></i>
+                                <i class="fas fa-edit"></i>
                             </a>
                         </td>
                         <td>

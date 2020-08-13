@@ -14,11 +14,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Homepage
+Route::get('/', 'HomeController@index')->name('welcome');
+
 Auth::routes([ 'verify' => true ]);
 
-//Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
-Route::get('/', 'HomeController@index');
+// User routes
+Route::get('/dashboard', 'HomeController@userIndex')->name('home')->middleware('verified');
+Route::post('/{id}/updatePassword', 'Auth\ProfileController@updatePassword')->name('update-password');
+Route::get('/{id}/edit-profile', 'Auth\ProfileController@edit')->name('edit-profile');
+Route::post('/edit-profile/{id}', 'Auth\ProfileController@update')->name('update-profile');
+Route::delete('/{id}/delete-profile', 'Auth\ProfileController@destroy')->name('delete-profile');
 
+// Admin routes
 Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function() {
 
     /**
@@ -46,9 +54,10 @@ Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function() {
 
     });
 
+    // Admin dashboard
     Route::get('/dashboard','HomeController@index')->name('home')->middleware('guard.verified:admin,admin.verification.notice');
 
-    // Movies routes
+    // Movie routes
     Route::resource('movies', 'MovieController');
 
 });

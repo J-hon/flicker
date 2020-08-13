@@ -48,11 +48,11 @@ class LoginController extends Controller
     /**
      * Show the login form.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function showLoginForm()
     {
-        return view('auth.login',[
+        return view('auth.login', [
             'title' => 'Admin Login',
             'loginRoute' => 'admin.login',
             'forgotPasswordRoute' => 'admin.password.request',
@@ -64,6 +64,7 @@ class LoginController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function login(Request $request)
     {
@@ -102,9 +103,7 @@ class LoginController extends Controller
     public function logout()
     {
         Auth::guard('admin')->logout();
-        return redirect()
-            ->route('admin.login')
-            ->with('status','Admin has been logged out!');
+        return redirect('/')->with('status','Admin has been logged out!');
     }
 
     /**
@@ -135,7 +134,8 @@ class LoginController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    private function loginFailed(){
+    private function loginFailed()
+    {
         return redirect()
             ->back()
             ->withInput()
@@ -147,7 +147,8 @@ class LoginController extends Controller
      *
      * @return string
      */
-    public function username(){
+    public function username()
+    {
         return 'email';
     }
 }

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin\Auth;
 
-use Auth;
-use Password;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Password;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
@@ -26,7 +26,7 @@ class ResetPasswordController extends Controller
     /**
      * Only guests for "admin" guard are allowed except
      * for logout.
-     * 
+     *
      * @return void
      */
     public function __construct()
@@ -36,12 +36,13 @@ class ResetPasswordController extends Controller
 
     /**
      * Show the reset password form.
-     * 
+     *
      * @param  \Illuminate\Http\Request $request
      * @param  string|null  $token
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function showResetForm(Request $request, $token = null){
+    public function showResetForm(Request $request, $token = null)
+    {
         return view('auth.passwords.reset',[
             'title' => 'Reset Admin Password',
             'passwordUpdateRoute' => 'admin.password.update',
@@ -54,7 +55,8 @@ class ResetPasswordController extends Controller
      *
      * @return \Illuminate\Contracts\Auth\PasswordBroker
      */
-    protected function broker(){
+    protected function broker()
+    {
         return Password::broker('admins');
     }
 

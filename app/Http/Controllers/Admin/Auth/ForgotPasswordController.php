@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers\Admin\Auth;
 
-use Auth;
-use Password;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Password;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 
@@ -15,7 +14,7 @@ class ForgotPasswordController extends Controller
     /**
      * Only guests for "admin" guard are allowed except
      * for logout.
-     * 
+     *
      * @return void
      */
     public function __construct()
@@ -25,10 +24,11 @@ class ForgotPasswordController extends Controller
 
     /**
      * Show the reset email form.
-     * 
-     * @return \Illuminate\Http\Response
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function showLinkRequestForm(){
+    public function showLinkRequestForm()
+    {
         return view('auth.passwords.email',[
             'title' => 'Admin Password Reset',
             'passwordEmailRoute' => 'admin.password.email'
@@ -37,20 +37,22 @@ class ForgotPasswordController extends Controller
 
     /**
      * password broker for admin guard.
-     * 
+     *
      * @return \Illuminate\Contracts\Auth\PasswordBroker
      */
-    public function broker(){
+    public function broker()
+    {
         return Password::broker('admins');
     }
 
     /**
      * Get the guard to be used during authentication
      * after password reset.
-     * 
+     *
      * @return \Illuminate\Contracts\Auth\StatefulGuard
      */
-    public function guard(){
+    public function guard()
+    {
         return Auth::guard('admin');
     }
 }
