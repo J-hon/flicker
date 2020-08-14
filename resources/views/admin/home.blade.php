@@ -8,28 +8,18 @@
                 <div class="card">
                     <div class="card-header">Admin Dashboard</div>
                     <div class="card-body">
-                        <b>Report</b>
-                        <br>
-                        Customers whose age is above 50 -
-                        @foreach($usersAbove50 as $user)
-                            {{ $user->name }}
-                        @endforeach
-                        <br>
-                        Movies that have Genre 'Action' - {{ $number }}
-                        <br>
-                        Movies that end with 's' -
-                        @foreach($startWithS as $movie)
-                            {{ $movie->name }}
-                        @endforeach
-                        <br>
-
                         <div class="text-center">
                             <a href="{{ route('admin.movies.index') }}" class="btn btn-outline-primary">
-                                Movies
+                                All Movies
+                            </a>
+
+                            <a href="{{ url('/admin/report') }}" class="btn btn-outline-success">
+                                <i class="fas fa-clipboard-list"></i> Report
                             </a>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>

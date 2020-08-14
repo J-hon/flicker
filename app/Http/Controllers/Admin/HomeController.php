@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Movie;
+use App\Order;
 use App\User;
+use Carbon\Carbon;
 use DateTime;
 
 class HomeController extends Controller
@@ -27,8 +29,12 @@ class HomeController extends Controller
      */
     public function index()
     {
+        return view('admin.home');
+    }
+
+    public function report()
+    {
         $actionMovies = Movie::where('genre_id', 1)->get();
-        $number = count($actionMovies);
 
         $users = User::all();
         $usersAbove50 = [];
@@ -52,8 +58,50 @@ class HomeController extends Controller
             }
         }
 
-        return view('admin.home')->with('number', $number)->with('usersAbove50', $usersAbove50)
-                                        ->with('startWithS', $startWithS);
+        $orders = Order::all();
+        $totalOrders = count($orders);
+
+        $monthlyOrders = $this->monthlyOrders();
+
+        $months = array();
+        for ($i = 0; $i < 12; $i++) {
+            $timestamp = mktime(0, 0, 0, date('n') + $i, 1);
+            $months[date('n', $timestamp)] = date('F', $timestamp);
+        }
+
+        return view('admin.report')->with('actionMovies', $actionMovies)
+            ->with('usersAbove50', $usersAbove50)
+            ->with('startWithS', $startWithS)
+            ->with('monthlyOrders', $monthlyOrders)
+            ->with('months', $months)
+            ->with('totalOrders', $totalOrders);
+    }
+
+    private function monthlyOrders()
+    {
+        $users = Order::select('id', 'created_at')
+            ->get()
+            ->groupBy(function($date) {
+                // return Carbon::parse($date->created_at)->format('Y'); // grouping by years
+                return Carbon::parse($date->created_at)->format('m'); // grouping by months
+            });
+
+        $usermcount = [];
+        $userArr = [];
+
+        foreach ($users as $key => $value) {
+            $usermcount[(int)$key] = count($value);
+        }
+
+        for($i = 1; $i <= 12; $i++){
+            if(!empty($usermcount[$i])){
+                $userArr[$i] = $usermcount[$i];
+            }else{
+                $userArr[$i] = 0;
+            }
+        }
+
+        return $userArr;
     }
 
     private function getAge($dob)

@@ -55,6 +55,8 @@ class ProfileController extends Controller
         $user->address = request('address');
         $user->date_of_birth = request('date_of_birth');
 
+        $user->email_verified_at = null;
+
         $user->save();
         return redirect()->route('home');
     }

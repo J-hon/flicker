@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Homepage
-Route::get('/', 'HomeController@index')->name('welcome');
+Route::get('/', 'HomeController@index')->name('welcome')->middleware('verified');
 
 Auth::routes([ 'verify' => true ]);
 
@@ -63,6 +63,7 @@ Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function() {
 
     // Admin dashboard
     Route::get('/dashboard','HomeController@index')->name('home')->middleware('guard.verified:admin,admin.verification.notice');
+    Route::get('/report', 'HomeController@report')->name('report');
 
     // Movie routes
     Route::resource('movies', 'MovieController');
