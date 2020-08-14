@@ -2,6 +2,7 @@
 
 use App\Admin;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class AdminsTableSeeder extends Seeder
 {
@@ -13,7 +14,7 @@ class AdminsTableSeeder extends Seeder
     public function run()
     {
         $admin = new Admin;
-        $admin->name = 'john doe';
+        $admin->name = 'John Doe';
         $admin->email = 'admin@admin.com';
         $admin->password = Hash::make('password');
         $admin->save();
