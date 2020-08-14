@@ -12,6 +12,11 @@ class OrderController extends Controller
         $this->middleware('auth');
     }
 
+    /**
+     * Return the orders view
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index()
     {
         $user = Auth::user();

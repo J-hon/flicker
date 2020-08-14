@@ -34,11 +34,14 @@ class HomeController extends Controller
 
     public function report()
     {
+        // get the action movies
+        // '1' is the id for action in the genres table
         $actionMovies = Movie::where('genre_id', 1)->get();
 
         $users = User::all();
         $usersAbove50 = [];
 
+        // Loop through the users' date_of_birth field
         foreach ($users as $user)
         {
             if ($this->getAge($user->date_of_birth) > 50)
@@ -47,9 +50,11 @@ class HomeController extends Controller
             }
         }
 
+
         $movies = Movie::all();
         $startWithS = [];
 
+        // Loop through the movie name field
         foreach ($movies as $movie)
         {
             if ($this->endFunc($movie->name, 's'))

@@ -58,6 +58,7 @@ class MovieController extends Controller
 
         $movie = new Movie();
 
+        // Store the image
         if ($request->hasFile('image'))
         {
             $image = $request->file('image');

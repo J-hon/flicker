@@ -24,6 +24,11 @@ class HomeController extends Controller
         return view('welcome')->with('movies', $movies);
     }
 
+    /**
+     * Show the application user dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
     public function userIndex()
     {
         $user = Auth::user();
