@@ -2,15 +2,15 @@
 
 @section('content')
 
-{{--    <h3 class="text-center mt-3">Welcome to Flicker</h3>--}}
-
     <div class="container">
         <div class="row">
 
             @foreach($movies as $movie)
 
                 <div class="col-md-3" id="box">
-                    <form class="product-form">
+                    <form class="product-form" action="{{ route('pay') }}" method="post">
+                        {{ csrf_field() }}
+
                         <img class="product_image img-fluid" src="{{ asset('images/movies/'.$movie->image) }}">
 
                         <div class="product-details">
@@ -27,7 +27,14 @@
                             </h6>
 
                             <div class="text-center">
-                                {{ $movie->price }}
+                                ₦{{ $movie->price }}
+
+                                <input type="hidden" name="email" value="{{ Auth::user()->email }}">
+                                <input type="hidden" name="currency" value="NGN" />
+                                <input type="hidden" name="country" value="NG" />
+                                <input type="hidden" name="amount" value="{{ $movie->price }}" />
+
+                                <input type="hidden" name="movie" value="{{ $movie->name }}" />
 
                                 <br>
 

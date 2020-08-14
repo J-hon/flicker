@@ -27,6 +27,10 @@
                                 <i class="fas fa-edit"></i> Edit profile
                             </a>
 
+                            <a href="{{ route('orders') }}" class="btn btn-outline-dark">
+                                <i class="fas fa-clipboard-list"></i> Orders
+                            </a>
+
                             <form action="{{ route('delete-profile', $user->id) }}" method="POST">
                                 @csrf
                                 {{ method_field('DELETE') }}

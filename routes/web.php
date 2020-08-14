@@ -26,6 +26,13 @@ Route::get('/{id}/edit-profile', 'Auth\ProfileController@edit')->name('edit-prof
 Route::post('/edit-profile/{id}', 'Auth\ProfileController@update')->name('update-profile');
 Route::delete('/{id}/delete-profile', 'Auth\ProfileController@destroy')->name('delete-profile');
 
+// Rave routes
+Route::post('/pay', 'RaveController@initialize')->name('pay');
+Route::get('/rave/callback', 'RaveController@callback')->name('callback');
+
+// Order routes
+Route::get('/orders', 'OrderController@index')->name('orders');
+
 // Admin routes
 Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function() {
 
